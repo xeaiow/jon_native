@@ -1,5 +1,5 @@
 <ul>
-    <li><a href="">新增管理員</a></li>
+    <li><a href="<?=$base_url?>admin/create.php">新增管理員</a></li>
     <li><a href="">管理員列表</a></li>
     <li><a href="">群組列表</a></li>
     <li><a href="">新增群組</a></li>

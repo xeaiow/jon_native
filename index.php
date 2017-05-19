@@ -9,8 +9,8 @@
 <body>
     
     <?php
-        require 'navbar.php';
         require 'config/config.php';
+        require 'navbar.php';
     ?>
 
     <table border="1">
