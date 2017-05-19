@@ -28,8 +28,8 @@
             <th>編輯</th>
         </tr>
         <?php
-            // 取得管理員列表
-            $getMember = $link->query("SELECT member.*, groups.title FROM member, groups WHERE member.groups = groups.auth");
+            // 取得管理員列表 *過濾 status = 1 之使用者
+            $getMember = $link->query("SELECT member.*, groups.title FROM member, groups WHERE status = 0 AND member.groups = groups.auth");
 
             while ($row = $getMember->fetch_assoc()) { ?>
 
@@ -46,7 +46,7 @@
                     <td><?=$row['created_at']?></td>
                     <td>
                         <button type="button" onclick="window.location='<?=$base_url?>admin/edit.php?id=<?=$row['id']?>'">編輯</button>
-                        <button type="button">刪除</button>
+                        <button type="button" onclick="window.location='<?=$base_url?>admin/remove.php?id=<?=$row['id']?>'">刪除</button>
                     </td>
                 </tr>
     <?php } ?>

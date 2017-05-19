@@ -22,5 +22,5 @@
     }
     else {
         
-        echo "failed";
+        echo "Failed update member.";
     }
