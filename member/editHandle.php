@@ -12,16 +12,16 @@
     $qq_id      = $_POST['qq_id'];
     $wechat_id  = $_POST['wechat_id'];
     $line_id    = $_POST['line_id'];
-    $groups      = $_POST['groups'];
+    $point      = $_POST['point'];
 
-    $link->query("UPDATE member SET username = '$username', firstname = '$firstname', email = '$email', phone = '$phone', qq_id = '$qq_id', wechat_id = '$wechat_id', line_id = '$line_id', groups = '$groups' WHERE id = '$id'");
+    $link->query("UPDATE users SET username = '$username', firstname = '$firstname', email = '$email', phone = '$phone', qq_id = '$qq_id', wechat_id = '$wechat_id', line_id = '$line_id', point = '$point' WHERE id = '$id'");
 
     // 是否成功操作
     if ($link->affected_rows > 0) {
 
-        echo '<meta http-equiv="refresh" content="0;url='.$base_url.'">';
+        echo '<meta http-equiv="refresh" content="0;url='.$base_url.'member/lists.php">';
     }
     else {
         
-        echo "Failed update member.";
+        echo "Failed update user.";
     }

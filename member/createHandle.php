@@ -10,17 +10,17 @@
     $qq_id      = $_POST['qq_id'];
     $wechat_id  = $_POST['wechat_id'];
     $line_id    = $_POST['line_id'];
-    $groups     = $_POST['groups'];
+    $point      = $_POST['point'];
 
 
-    $link->query("INSERT INTO member (username, password, firstname, email, phone, qq_id, wechat_id, line_id, groups) VALUES ('$username', '$password', '$firstname', '$email', '$phone', '$qq_id', '$wechat_id', '$line_id', '$groups')");
+    $link->query("INSERT INTO users (username, password, firstname, email, phone, qq_id, wechat_id, line_id, point) VALUES ('$username', '$password', '$firstname', '$email', '$phone', '$qq_id', '$wechat_id', '$line_id', '$point')");
 
     // 是否成功操作
     if ($link->affected_rows > 0) {
 
-        echo '<meta http-equiv="refresh" content="0;url='.$base_url.'">';
+        echo '<meta http-equiv="refresh" content="0;url='.$base_url.'member/lists.php">';
     }
     else {
         
-        echo "Failed create member.";
+        echo "Failed create user.";
     }

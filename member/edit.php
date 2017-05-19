@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>edit - jonLogin</title>
+    <title>editUsers - jonLogin</title>
 </head>
 <body>
     
@@ -18,16 +18,13 @@
         $id = $_GET['id'];
 
         // 取得該使用者資料
-        $getMember = $link->query("SELECT member.*, groups.title FROM member, groups  WHERE member.groups = groups.auth");
-        
-        // 取得所有群組資料
-        $getGroups = $link->query("SELECT * FROM groups");
+        $getMember = $link->query("SELECT * FROM users  WHERE id = '$id'");
         
         $memberRow = $getMember->fetch_assoc();
 
     ?>
 
-    <form action="<?=$base_url?>admin/editHandle.php?id=<?=$memberRow['id']?>" method="POST">
+    <form action="<?=$base_url?>member/editHandle.php?id=<?=$memberRow['id']?>" method="POST">
 
         帳號：<input type="text" name="username" value="<?=$memberRow['username']?>"><br />
         姓名：<input type="text" name="firstname" value="<?=$memberRow['firstname']?>"><br />
@@ -36,26 +33,7 @@
         QQ：<input type="text" name="qq_id" value="<?=$memberRow['qq_id']?>"><br />
         微信：<input type="text" name="wechat_id" value="<?=$memberRow['wechat_id']?>"><br />
         LINE：<input type="text" name="line_id" value="<?=$memberRow['line_id']?>"><br />
-        群組：
-        <select name="groups">
-        <?php while ($groupsRow = $getGroups->fetch_assoc()) {
-                
-                // 將當前群組設為 selected
-                if ($memberRow['groups'] === $groupsRow['auth']) { ?>
-
-                    <option value="<?=$groupsRow['auth']?>" selected><?=$groupsRow['title']?></option>
-            
-            <?php }
-
-                else { ?>
-
-                    <option value="<?=$groupsRow['auth']?>"><?=$groupsRow['title']?></option>
-            
-            <?php } ?>
-     
-        <?php } ?>
-
-        </select><br />
+        點數：<input type="number" name="point" value="<?=$memberRow['point']?>"><br />
     
         加入時間：<?=$memberRow['created_at']?><br />
         
