@@ -1,6 +1,7 @@
 <?php 
 
     require '../config/config.php';
+    require '../config/middleware.php';
 
     $username   = $_POST['username'];
     $password   = sha1($_POST['password']); 
@@ -12,15 +13,18 @@
     $line_id    = $_POST['line_id'];
     $groups     = $_POST['groups'];
 
+    // 新增管理員
+    $link->query(
+        "INSERT INTO 
+            member 
+                (username, password, firstname, email, phone, qq_id, wechat_id, line_id, groups) 
+            VALUES 
+                ('$username', '$password', '$firstname', '$email', '$phone', '$qq_id', '$wechat_id', '$line_id', '$groups')"
+    );
 
-    $link->query("INSERT INTO member (username, password, firstname, email, phone, qq_id, wechat_id, line_id, groups) VALUES ('$username', '$password', '$firstname', '$email', '$phone', '$qq_id', '$wechat_id', '$line_id', '$groups')");
-
-    // 是否成功操作
-    if ($link->affected_rows > 0) {
-
-        echo '<meta http-equiv="refresh" content="0;url='.$base_url.'">';
-    }
-    else {
-        
-        echo "Failed create member.";
-    }
+    // 是否操作成功
+    echo ( $link->affected_rows == 1 ) 
+    ? 
+        header("location:" .$base_url. "lists.php")
+    : 
+        'Failed create member.';

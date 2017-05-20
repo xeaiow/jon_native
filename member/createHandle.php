@@ -1,6 +1,7 @@
 <?php 
 
     require '../config/config.php';
+    require '../config/middleware.php';
 
     $username   = $_POST['username'];
     $password   = sha1($_POST['password']); 
@@ -12,15 +13,18 @@
     $line_id    = $_POST['line_id'];
     $point      = $_POST['point'];
 
-
-    $link->query("INSERT INTO users (username, password, firstname, email, phone, qq_id, wechat_id, line_id, point) VALUES ('$username', '$password', '$firstname', '$email', '$phone', '$qq_id', '$wechat_id', '$line_id', '$point')");
+    // 新增使用者
+    $link->query(
+        "INSERT INTO 
+            users 
+                (username, password, firstname, email, phone, qq_id, wechat_id, line_id, point) 
+            VALUES 
+                ('$username', '$password', '$firstname', '$email', '$phone', '$qq_id', '$wechat_id', '$line_id', '$point')"
+    );
 
     // 是否成功操作
-    if ($link->affected_rows > 0) {
-
-        echo '<meta http-equiv="refresh" content="0;url='.$base_url.'member/lists.php">';
-    }
-    else {
-        
-        echo "Failed create user.";
-    }
+    echo ( $link->affected_rows > 0 ) 
+    ? 
+        header("location:" .$base_url. "member/lists.php")
+    : 
+        'Failed create user or email, username, repeat.';

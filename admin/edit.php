@@ -18,7 +18,7 @@
         $id = $_GET['id'];
 
         // 取得該使用者資料
-        $getMember = $link->query("SELECT member.*, groups.title FROM member, groups  WHERE member.groups = groups.auth");
+        $getMember = $link->query("SELECT member.*, groups.title FROM member, groups  WHERE member.groups = groups.auth AND member.id = '$id'");
         
         // 取得所有群組資料
         $getGroups = $link->query("SELECT * FROM groups");

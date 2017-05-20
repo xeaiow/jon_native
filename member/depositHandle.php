@@ -1,6 +1,7 @@
 <?php 
 
     require '../config/config.php';
+    require '../config/middleware.php';
 
     // 取得使用者 id
     $id     = $_GET['id'];
@@ -9,11 +10,9 @@
     // 更改使用者的點數
     $link->query("UPDATE users SET point = point + '$point' WHERE id = '$id'");
 
-    if ($link->affected_rows == 1) {
-
-        echo '<meta http-equiv="refresh" content="0;url='.$base_url.'member/lists.php">';
-    }
-    else {
-        
-        echo "Failed remove member.";
-    }
+    // 是否成功操作
+    echo ( $link->affected_rows == 1 ) 
+    ? 
+        header("location:" .$base_url. "member/lists.php")
+    : 
+        'Failed remove member.';

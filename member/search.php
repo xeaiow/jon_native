@@ -13,9 +13,9 @@
     require '../config/config.php';
     require '../navbar.php';
     
-    $keywords = $_POST['keywords'];
+    $keywords = isset($_POST['keywords']);
 
-    $searchUser = $link->query("SELECT * FROM users WHERE status = 0 AND id LIKE '%$keywords%' OR firstname LIKE '%$keywords%' OR email LIKE '%$keywords%'");
+    $searchUser = $link->query("SELECT * FROM users WHERE status = 0 AND id LIKE '%$keywords%' OR firstname LIKE '%$keywords%' OR username LIKE '%$keywords%' OR email LIKE '%$keywords%'");
     $userCounts = $searchUser->num_rows;
 
     // 判斷是否存在搜尋的使用者

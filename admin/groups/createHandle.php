@@ -1,6 +1,7 @@
 <?php 
 
     require '../../config/config.php';
+    require '../../config/middleware.php';
 
     $title       = $_POST['title'];
     $auth        = $_POST['auth'];
@@ -12,14 +13,17 @@
     $server_auth = ( $_POST['func_6'] == 1 ? 1:0);
 
 
-    $link->query("INSERT INTO groups (title, auth, manager, member, game_server, firewall, finance, server_auth) VALUES ('$title', '$auth', '$manager', '$member', '$game_server', '$firewall', '$finance', '$server_auth')");
+    $link->query(
+        "INSERT INTO 
+            groups 
+                ( title, auth, manager, member, game_server, firewall, finance, server_auth ) 
+            VALUES 
+                ( '$title', '$auth', '$manager', '$member', '$game_server', '$firewall', '$finance', '$server_auth' )"
+    );
 
-    // 是否成功操作
-    if ($link->affected_rows > 0) {
-
-        echo '<meta http-equiv="refresh" content="0;url='.$base_url.'admin/groups/lists.php">';
-    }
-    else {
-        
-        echo "Failed create groups.";
-    }
+    // 是否操作成功
+    echo ( $link->affected_rows == 1 ) 
+    ? 
+        header("location:" .$base_url. "admin/groups/lists.php")
+    : 
+        'Failed create groups.';

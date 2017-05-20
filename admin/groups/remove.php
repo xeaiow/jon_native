@@ -1,18 +1,17 @@
 <?php 
 
     require '../../config/config.php';
+    require '../../config/middleware.php';
 
     // 取得群組 id
     $id = $_GET['id'];
 
     // 將使用者的 status 狀態更改為 1
-    $link->query("DELETE FROM groups WHERE auth = '$id'");
+    $link->query("DELETE FROM groups WHERE id = '$id'");
 
-    if ($link->affected_rows == 1) {
-
-        echo '<meta http-equiv="refresh" content="0;url='.$base_url.'admin/groups/lists.php">';
-    }
-    else {
-        
-        echo "Failed remove groups.";
-    }
+    // 是否操作成功
+    echo ( $link->affected_rows == 1 ) 
+    ? 
+        header("location:" .$base_url. "admin/groups/lists.php")
+    : 
+        'Failed remove groups.';

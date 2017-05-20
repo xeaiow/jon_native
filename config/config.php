@@ -1,4 +1,5 @@
 <?php
+	
 	$host 		= "localhost";
 	$username 	= "root";
 	$password 	= "123456";
@@ -10,3 +11,5 @@
 	date_default_timezone_set("Asia/Taipei");
 
 	$base_url = "//localhost/jon_native/";
+
+	
